@@ -14,7 +14,13 @@ Date  Who     Start   Stop  Interruptions Question TimeOnTask    Comments
 9/4     MA    16:00  17:20         7               Q9,Q10       42              Completed Question 9 and 10.
 
 ============committing to git: 9/4 22:45 ===================  
-
+9/5     MA    06:45  07:00         0               Q1               15              Completed Question 1 from set00
+9/5     MA    07:05  08:30         0               Q2,Q3,Q4   85              Completed Question 2,3,4 from set00
+9/5     MA    09:24  11:42         4               Q5,Q6,Q7   115             Completed Question 5,6,7 from set00
+9/5     MA    12:08  13:30         3               Q8,Q9         67              Completed Questoin 8 and completed Question 9 partially  
+9/5     MA    14:03  14:15         0               NA               12              Answered Zetao Wang's Question in Piazza            
+9/5     MA    16:00  17:20         7               Q9,Q10       42              Completed Question 9 and 10.
+============committing to git: 9/5 23:40 ===================  
     
 Total Time On Task Q1 (minutes)                  
 Total Time On Task Q2 (minutes)                   
