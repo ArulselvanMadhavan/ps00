@@ -1,0 +1,61 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 21a.rkt) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp")))))
+
+(require rackunit)
+(require rackunit/text-ui)
+(require 2htdp/image)
+
+(define-struct person [first-name last-name age height weight])
+(define-struct image-dimensions [ht wt])
+(define (person-img first-name last-name age height weight)
+ (final_image height weight) 
+)
+
+(define (final_image height weight)
+  ( head_chst_rt_lg height weight)
+  )
+
+(define (head_chst_rt_lg height weight)
+  ( head_chest_hands height weight)
+)
+
+(define ( head_chest_hands height weight)
+  (
+   (beside (right-hand height weight) (head_over_chest height weight) (left-hand height weight))
+   )
+  )
+(define (head_over_chest height weight)
+  (
+   (above (head height weight) (chest height weight))
+   )
+  )
+
+(define (head height weight)
+  (head_radius (height weight))
+  )
+
+(define (head_radius height weight)
+  (
+   (/ (/ (/ (+ (* height 2.5 ) (* weight 2.5)) 2) 4.8) 2)
+   )
+  )
+(define (chest height weight)
+  (
+   (rectangle (/ (* weight 2.5) 3)( / (* height 2.5) 2.15) "outline" "blue")
+   )
+  )
+
+(define (right-hand height weight) 
+  (ellipse (/ (* width 2.5) 3.25) (/ (* height 2.5) 10.5) "outline" "blue")
+  )
+
+(define (left-hand height weight) 
+  (ellipse (/ (* width 2.5) 3.25) (/ (* height 2.5) 10.5) "outline" "blue")
+  )
+
+;(define my-person (make-person "A" "L" 24 168 162))
+;(define (compute_img_dim image-dimensions)
+  
+
+;(define final_img_ht (* (person-height my-person) 2.5))

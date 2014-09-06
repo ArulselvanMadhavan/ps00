@@ -1,0 +1,21 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 31.rkt) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
+;Ex31: Design a function that, given a list of Numbers,
+;returns a list of Images,where each image is a circle
+;that has a radius based on a number of the input list.
+
+;;DATA DEFINITIONS
+;;Circles-From-List ListOfNumbers -> ListOfImages
+;;GIVEN   : A List consisting of Numbers
+;;RETURNS : A List of images of circles 
+;           whose radii value is taken from the input list.
+
+
+(define (ListOfCircles lst)
+  (cond
+    [(empty? lst) empty]
+    [(cons? lst) (cons (circle (first lst) "outline" "blue") (ListOfCircles (rest lst)))]))
+
+(define Crcls_set_1 (list 15 0 5 32 1 60))
+(ListOfCircles Crcls_set_1)
