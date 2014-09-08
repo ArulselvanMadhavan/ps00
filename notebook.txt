@@ -14,13 +14,20 @@ Date  Who     Start   Stop  Interruptions Question TimeOnTask    Comments
 9/4     MA    16:00  17:20         7               Q9,Q10       42              Completed Question 9 and 10.
 
 ============committing to git: 9/4 22:45 ===================  
-9/5     MA    06:45  07:00         0               Q1               15              Completed Question 1 from set00
-9/5     MA    07:05  08:30         0               Q2,Q3,Q4   85              Completed Question 2,3,4 from set00
-9/5     MA    09:24  11:42         4               Q5,Q6,Q7   115             Completed Question 5,6,7 from set00
-9/5     MA    12:08  13:30         3               Q8,Q9         67              Completed Questoin 8 and completed Question 9 partially  
-9/5     MA    14:03  14:15         0               NA               12              Answered Zetao Wang's Question in Piazza            
-9/5     MA    16:00  17:20         7               Q9,Q10       42              Completed Question 9 and 10.
+9/5     MA    07:15  09:25         1               Q16,Q17      115            Completed Question 16 and Question17 from Lesson 0.4. Started analyzing Q18.
+9/5     MA    09:55  11:30         0               Q18,Q19       80              Completed analyzing Q18 and solved Q18 and Q19.
+9/5     MA    12:24  16:42         3           Q20,Q21,Q21a 243            Analyzed and Completed Q20,Q21,Q21a as all three were inter-related questions.
+9/5     MA    15:08  19:30         0              Q22,Q23        140            Analyzed and completed Q22and Q23
+9/5     MA    21:03  23:15         8               NA                12               Learned and practised Lists to prepare for the next set of exercises.
 ============committing to git: 9/5 23:40 ===================  
+9/6   MA     06:45  08:02          0              Q24,Q25        70              Completed Q24 . Analyzed and Q25 and wrote down the template to solve Q25
+9/6   MA     09:42  12:30         2            Q25,Q26,Q27    145           Completed Q25 and Q26. Stuck with Q27a.
+9/6   MA     13:45  14:56         1                Q27a              55              Referred libraries to think of ways to solve Q27a 
+9/6  MA      15:00  16:10         1               NA                  70              Problems with Github. Worked with Kunal to solve the issue. Found a workaround but not a solution.
+					               Will have to re-commit everything in the new repository.
+9/6   MA    17:00  20:18          6           Q27a,Q28,Q29   162           Solved Q27a ,Q28, Q29
+9/6  MA     21:05  22:00          0            Q29                    55             Partially completed Q29
+============committing to git: 9/5 22:20 ===================                      
     
 Total Time On Task Q1 (minutes)                  
 Total Time On Task Q2 (minutes)                   

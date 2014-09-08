@@ -1,25 +1,30 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 29.rkt) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |22|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
 (require rackunit)
 (require rackunit/text-ui)
-
-
-;Ex29: Look up the beside/align function on the Racket Help Desk. 
-;Use it to design a function that takes a list of people (as defined in Ex21)
-;and uses the function from Ex21 to draw these people, 
-;placing them beside each other to form some kind of a group photo.
-
+(require 2htdp/image)
+(require 2htdp/universe)
 
 (define-struct person [first-name last-name age height weight])
-(define-struct image-dimensions [ht wt])
-;(define (person-img first-name last-name age height weight)
-; (final_image height weight) 
-;)
 
-(define (person-img prsn)
-  (final_image (person-height prsn) (person-weight prsn)))
+;(define (person-img person)
+; (final_image 
+;  (person-height person)
+;  (person-weight person)))
 
+;Add predicates
+;ADD GLOBAL CONSTANTS 
+(define (person-img first-name last-name age height weight)
+  (above
+  (final_image 
+   (person-height (make-person first-name last-name age height weight))
+   (person-weight (make-person first-name last-name age height weight))
+   )
+  (text (string-append first-name last-name) 24 "blue")))
+    
+    
+  
 (define (final_image height weight)
   (overlay/xy (left-leg height weight) (- 0 (lf_leg_x_pos height weight)) (- 0 (rt_leg_y_pos height weight)) ( head_chst_rt_lg height weight))
   )
@@ -77,29 +82,4 @@
 (define (left-leg height weight)
   (rectangle (/ (* weight 2.5) 16.2) (/ (* height 2.5)  3) "outline" "blue")
 )
-
-
-
-
-;;DATA_DEFIITIONS
-;;group_photo list_of_prsns -> Image
-;;Given  : List of persons with images 
-;;Returns: Image in which all the persons in the list
-;;         are placed besides each other.
-;;Template
-
-(define list_of_persons (list 
-                         (make-person "Arulselvan" "Madhavan" 24 170 170)
-                         (make-person "Test" "Person" 21 190 190)
-                         (make-person "Test" "Child"  20 140 140)))
-
-(define WHT_SPC (text " " 24 "blue"))
-
-(define (grp_photo lst)
-  (cond
-    [(empty? lst) WHT_SPC]
-    [(cons? lst) (beside/align "bottom"
-                               (person-img (first lst))
-                               (grp_photo (rest lst)))]))
-
-(grp_photo list_of_persons)
+  

@@ -1,17 +1,24 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 21a.rkt) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |29|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
 (require rackunit)
 (require rackunit/text-ui)
-(require 2htdp/image)
-(require 2htdp/universe)
+
+
+;Ex29: Look up the beside/align function on the Racket Help Desk. 
+;Use it to design a function that takes a list of people (as defined in Ex21)
+;and uses the function from Ex21 to draw these people, 
+;placing them beside each other to form some kind of a group photo.
 
 
 (define-struct person [first-name last-name age height weight])
 (define-struct image-dimensions [ht wt])
-(define (person-img first-name last-name age height weight)
- (final_image height weight) 
-)
+;(define (person-img first-name last-name age height weight)
+; (final_image height weight) 
+;)
+
+(define (person-img prsn)
+  (final_image (person-height prsn) (person-weight prsn)))
 
 (define (final_image height weight)
   (overlay/xy (left-leg height weight) (- 0 (lf_leg_x_pos height weight)) (- 0 (rt_leg_y_pos height weight)) ( head_chst_rt_lg height weight))
@@ -71,8 +78,6 @@
   (rectangle (/ (* weight 2.5) 16.2) (/ (* height 2.5)  3) "outline" "blue")
 )
 
-;(define my-person (make-person "A" "L" 24 168 162))
-;(define (compute_img_dim image-dimensions)
-  
 
-;(define final_img_ht (* (person-height my-person) 2.5))
+
+

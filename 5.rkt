@@ -1,9 +1,12 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname |5|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
-;Ex 5: Define a function called sq that computes the square of a number. 
-;Write the contract, purpose statement, examples and definition of this function. Follow the examples of contracts and purpose statements above.
-
+;;Purpose of the file: To define a function called sqar 
+;;that computes the square of a number. 
+;;How to Run the Program (sqar <Input the number to be squared)
+;;Require Statements 
+(require rackunit)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DATA DEFINITIONS: none
 ;sqar: Number -> Number
 ;;GIVEN - Number of any kind (int,decimal) for which its square value needs to be computed

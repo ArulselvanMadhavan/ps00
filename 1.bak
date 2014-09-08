@@ -4,7 +4,6 @@
 ;;Purpose of the file: To write an expression whose value is 
 ;;the number of seconds in a leap year (a leap year has 366 days). 
 ;;Also, write 2 more expressions that have the same value.
-;;How to Run the Program: (yeartoseconds <Input days>)
 ;;Require Statements
 (require rackunit)
 (require rackunit/text-ui)
