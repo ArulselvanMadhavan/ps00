@@ -1,0 +1,11 @@
+Date	Who	Start	Stop	Interruptions	Question		           Time on Task		Comments
+9/12	MA	7:43	9:18	3		Q16,Q17,Q18		72		Solved Q16,Q17,Q18
+9/12	MA	10:20	12:08	0		Q19,Q20		                 108		Solved Q19 ; Thought out and laid a plan for Q20
+9/12	MA	14:30	18:00	5		Q20(contd),Q21	                 190		Solved Q20,Q21
+============committing to git: 9/13 08:46 ===================
+
+    
+Total Time On Task Q1 (minutes)                  
+Total Time On Task Q2 (minutes)                   
+TOTQ1 (hours and tenths)                          
+TOTQ2 (hours and tenths)                         
