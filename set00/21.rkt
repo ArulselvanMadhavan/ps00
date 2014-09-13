@@ -41,72 +41,209 @@
 ;;(define person-fn (make-person "Arul" "Selvan" 24 170 180))
 ;;(define person-fn (make-person "Alan" "Turing" 23 220 240))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;CONTRACT
+;;ARBITRARY CONSTANTS
+(define IMAGE-ARB-CONST 2.5)
+(define LEG-WT-ARB-CONST 16.2)
+(define LEG-HT-ARB-CONST 3)
+(define IMAGE-MODE "outline")
+(define IMAGE-COLOR "blue")
+(define HAND-WT-ARB-CONST 3.25)
+(define HAND-HT-ARB-CONST 10.5)
+(define CHEST-WT-ARB-CONST 3)
+(define CHEST-HT-ARB-CONST 2.15)
+(define HEAD-ARB-CONST1 2)
+(define HEAD-ARB-CONST2 4.8)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;person-img person -> Image
 ;;GIVEN   : A person
 ;;RETURNS : An Image proportional to the height and width of the person
 ;;EXAMPLES: person-img(person) => Image
-;;DESIGN STRATEGY: Functional Composition
+;;DESIGN STRATEGY: Functional composition
 
-(define (person-img prsn)
-  (final_image (person-height prsn) (person-weight prsn) ))
+(define (person-image prsn)
+  (final-image (person-height prsn) (person-weight prsn)))
 
-(define (final_image height weight)
-  (overlay/xy (left-leg height weight) (- 0 (lf_leg_x_pos height weight)) (- 0 (rt_leg_y_pos height weight)) ( head_chst_rt_lg height weight))
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; final-image : PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Human Image with 
+;; EXAMPLES: 
+;;          (final-image 170 180) => Image
+;;          (final-image 220 150) => Image
+;; STRATEGY:  Functional Composition
 
-(define (head_chst_rt_lg height weight)
-  (overlay/xy (right-leg  height weight) (- 0 (rt_leg_x_pos height weight)) (- 0 (rt_leg_y_pos height weight)) ( head_chest_hands height weight))
-  )
+(define (final-image height weight)
+  (overlay/xy (left-leg height weight) 
+              (- 0 (left-leg-x height weight)) 
+              (- 0 (right-leg-y height weight)) 
+              ( head-chst-rt-lg height weight)))
 
-(define ( head_chest_hands height weight)
-  (beside (right-hand height weight) (head_over_chest height weight) (left-hand height weight))
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; head-chst-rt-lg : PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Human Image with a head,chest,right hand, left hand and Right leg
+;; EXAMPLES: 
+;;          (head-chst-rt-lg 170 180) => Image
+;;          (head-chst-rt-lg 220 150) => Image
+;; STRATEGY:  Functional Composition
 
-(define (head_over_chest height weight)
-  (above (head height weight) (chest height weight))
-  )
+
+(define (head-chst-rt-lg height weight)
+  (overlay/xy (right-leg  height weight) 
+              (- 0 (right-leg-x height weight))
+              (- 0 (right-leg-y height weight)) 
+              ( head-chest-hands height weight)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; head-chest-hands : PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Human Image with a head,chest ,right and left hands
+;; EXAMPLES: 
+;;          (head-chest-hands 170 180) => Image
+;;          (head-chest-hands 220 150) => Image
+;; STRATEGY:  Functional Composition
+
+(define (head-chest-hands height weight)
+  (beside (right-hand height weight) 
+          (head-over-chest height weight) 
+          (left-hand height weight)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;head-over-chest : PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Human Image with a head and chest
+;; EXAMPLES: 
+;;          (head-over-chest 170 180) => Image
+;;          (head-over-chest 220 150) => Image
+;; STRATEGY:  Functional Composition
+
+(define (head-over-chest height weight)
+  (above (head height weight) (chest height weight)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; head : PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Image resembling the head of a human
+;; EXAMPLES: 
+;;          (head-over-chest 170 180) => Image
+;;          (head-over-chest 220 150) => Image
+;; STRATEGY:  Domain Knowledge
 
 (define (head height weight)
-  (circle (head_radius height weight) "outline" "blue")
-  )
+  (circle (head-radius height weight) IMAGE-MODE IMAGE-COLOR))
 
-(define (head_radius height weight)
-  
-  (/ (/ (/ (+ (* height 2.5 ) (* weight 2.5)) 2) 4.8) 2)
-  
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; head-radius : PosInt PosInt -> Number
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Radius used to draw the human head
+;; EXAMPLES: 
+;;          (head-radius 170 180) => 45.57
+;;          (head-radius 220 150) => 48.17
+;; STRATEGY:  Domain Knowledge
+
+(define (head-radius height weight) 
+  (/ (/ (/ (+ (* height IMAGE-ARB-CONST ) (* weight IMAGE-ARB-CONST)) HEAD-ARB-CONST1) HEAD-ARB-CONST2) 2))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; chest: PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Image resembling the human chest
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Domain Knowledge
+
 (define (chest height weight)
-  
-  (rectangle (/ (* weight 2.5) 3)( / (* height 2.5) 2.15) "outline" "blue")
-  
-  )
+  (rectangle (/ (* weight IMAGE-ARB-CONST) CHEST-WT-ARB-CONST)( / (* height IMAGE-ARB-CONST) CHEST-HT-ARB-CONST) IMAGE-MODE IMAGE-COLOR))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; right-hand: PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Image resembling the human hand
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Domain Knowledge
 
 (define (right-hand height weight) 
-  (ellipse (/ (* weight 2.5) 3.25) (/ (* height 2.5) 10.5) "outline" "blue")
-  )
+  (ellipse (/ (* weight IMAGE-ARB-CONST) HAND-WT-ARB-CONST) (/ (* height IMAGE-ARB-CONST) HAND-HT-ARB-CONST) IMAGE-MODE IMAGE-COLOR))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; left-hand: PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Image resembling the human hand
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Domain Knowledge
 
 (define (left-hand height weight) 
-  (ellipse (/ (* weight 2.5) 3.25) (/ (* height 2.5) 10.5) "outline" "blue")
-  )
+  (ellipse (/ (* weight IMAGE-ARB-CONST) HAND-WT-ARB-CONST) (/ (* height IMAGE-ARB-CONST) HAND-HT-ARB-CONST) IMAGE-MODE IMAGE-COLOR))
 
-(define (rt_leg_y_pos height weight)
-  (image-height (head_chest_hands height weight))
-  )
-(define (rt_leg_x_pos height weight)
-  (- (+ (image-width (right-hand height weight)) (/ (image-width (chest height weight)) 4)) (/ (image-width (left-leg height weight)) 2))
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; right-leg-y: PosInt PosInt -> Number
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : y-Position in the Image, where the right leg is to be placed
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Functional Composition
 
-(define (lf_leg_x_pos height weight)
-  (+ (rt_leg_x_pos height weight)  (/ (image-width (chest height weight)) 2))
-  )
+(define (right-leg-y height weight)
+  (image-height (head-chest-hands height weight)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; right-leg-x: PosInt PosInt -> Number
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : x-Position in the Image, where the right leg is to be placed
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Functional Composition
+
+(define (right-leg-x height weight)
+  (- (+ (image-width (right-hand height weight)) 
+        (/ (image-width (chest height weight)) 4))
+     (/ (image-width (left-leg height weight)) 2)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; left-leg-x: PosInt PosInt -> Number
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : x-Position in the Image, where the left leg is to be placed
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Functional Composition
+(define (left-leg-x height weight)
+  (+ (right-leg-x height weight)  (/ (image-width (chest height weight)) 2)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; right-leg: PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Image of the Right leg
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Domain Knowledge
 
 (define (right-leg height weight)
-  (rectangle  (/ (* weight 2.5) 16.2) (/ (* height 2.5)  3) "outline" "blue")
-  )
+  (rectangle  (/ (* weight IMAGE-ARB-CONST) LEG-WT-ARB-CONST) (/ (* height IMAGE-ARB-CONST)  LEG-HT-ARB-CONST) IMAGE-MODE IMAGE-COLOR))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; left-leg: PosInt PosInt -> Image
+;; GIVEN   : Height of the person in cms and Weight of the person in lbs
+;; RETURNS : Image of the Right leg
+;; EXAMPLES: 
+;;          (head-radius 170 180) => Image
+;;          (head-radius 220 150) => Image
+;; STRATEGY:  Domain Knowledge
 
 (define (left-leg height weight)
-  (rectangle (/ (* weight 2.5) 16.2) (/ (* height 2.5)  3) "outline" "blue")
-  )
+  (rectangle (/ (* weight IMAGE-ARB-CONST) LEG-WT-ARB-CONST) (/ (* height IMAGE-ARB-CONST)  LEG-HT-ARB-CONST) IMAGE-MODE IMAGE-COLOR))
+
+
+;;TESTS 
+(define img-ht-personA 431)
+(define img-ht-personB 215)
+(check-equal? (image-height (person-image (make-person "A" "L" 23 170 180))) 431 "Error: Expected Image height is 431")
+(check-equal? (image-height (person-image (make-person "B" "L" 23 85 90))) 215 "Error: Expected Image height is 215")
