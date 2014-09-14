@@ -5,6 +5,8 @@ Date	Who	Start	Stop	Interruptions	Question		           Time on Task		Comments
 ============committing to git: 9/13 08:46 ===================
 9/13	MA	12:49	14:09	0		Q21			80		Refactored Q21 to meet coding conventions
 ============committing to git: 9/13 14:10 ===================
+9/13	MA	14:31	19:58	0		Q22 to Q27		327		Solved Q22 to Q27
+============committing to git: 9/13 20:00 ===================
 
     
 Total Time On Task Q1 (minutes)                  

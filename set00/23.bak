@@ -1,0 +1,49 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |23|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
+;;Ex:24 - Write a function that returns the product of all the numbers in 
+;;a list 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require rackunit)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Data Definitions: 
+;;List Representation
+;; A List of Numbers(LON) is one of 
+;; -- empty                     interp: The List is empty
+;; -- cons Number LON           interp: List with Numbers as its elements
+;;Example: (list 2 3) => (cons 2 (cons 3 empty))
+;;CONSTRUCTOR 
+;; (list 2 3 4)
+;;DESTRUCTOR
+;; (first list) => Returns the first element in the list
+;; (rest list) => Returns the all elements except the first element
+;;template:
+;; list-fn : List -> ??
+; (define (list-fn lst)
+;   (cond
+;     [(empty? lst) ...]
+;     [else (... (first lst) (list-fn (rest lst)))]))
+
+;;product-list: ListOfNumbers -> Number
+;;GIVEN   : A List of Numbers
+;;RETURNS : the product of all the numbers in the list.
+;;Example : (product-list (list 5 4 3 )) => 60
+;;Strategy: Functional Composition
+
+
+(define (product-list lst)
+  (if (empty? lst)
+      0
+      (find-product lst)))
+
+(define (find-product lst)
+  (cond
+        [(empty? lst) 1]
+        [else (* (first lst) (find-product (rest lst)))]))
+  
+;;TESTS
+;;TEST CONSTANTS
+(define numbrs_lst (list 5 4 3 2 1))
+  
+(check-equal? (product-list numbrs_lst) 120 "Error:Expected value is 120")
+(check-equal? (product-list (list)) 0 "Error: Product of an empty list should be Zero")

@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname |21|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp")))))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 21a) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp")))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Ex 21:
 ;Here is a struct definition:
@@ -67,7 +67,9 @@
 ;;DESIGN STRATEGY: Functional composition
 
 (define (person-image prsn)
-  (final-image (person-height prsn) (person-weight prsn)))
+  (above (final-image (person-height prsn) (person-weight prsn))
+         (text (string-append (person-first-name prsn)
+                              (person-last-name prsn)) 24 "blue")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; final-image : PosInt PosInt -> Image
@@ -247,7 +249,7 @@
 
 
 ;;TESTS 
-(define img-ht-personA 431)
-(define img-ht-personB 215)
-(check-equal? (image-height (person-image (make-person "A" "L" 23 170 180))) 431 "Error: Expected Image height is 431")
-(check-equal? (image-height (person-image (make-person "B" "L" 23 85 90))) 215 "Error: Expected Image height is 215")
+(define img-ht-personA 458)
+(define img-ht-personB 242)
+(check-equal? (image-height (person-image (make-person "A" "L" 23 170 180))) img-ht-personA "Error: Expected Image height is 431")
+(check-equal? (image-height (person-image (make-person "B" "L" 23 85 90))) img-ht-personB "Error: Expected Image height is 215")
