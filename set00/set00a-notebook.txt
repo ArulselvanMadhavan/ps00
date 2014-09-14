@@ -8,7 +8,7 @@ Date	Who	Start	Stop	Interruptions	Question		           Time on Task		Comments
 9/13	MA	14:31	19:58	0		Q22 to Q27		327		Solved Q22 to Q27
 ============committing to git: 9/13 20:00 ===================
 9/14	MA	3:06	7:06	0		Q28 to Q31		240		Solved Q28 to Q31
-
+============committing to git: 9/13 07:09 ===================
     
 Total Time On Task Q1 (minutes)                  
 Total Time On Task Q2 (minutes)                   
